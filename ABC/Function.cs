@@ -20,7 +20,7 @@ namespace ABC
         /// </summary>
         public double BoundUpper { get; set; }
 
-        public double Dimensions { get; set; }
+        public int Dimensions { get; set; }
 
         public int IterationsNumber { get; set; } = 10000;
     }

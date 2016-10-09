@@ -33,8 +33,8 @@ namespace ABC
                 // Employed bees phase
                 for (var i = 0; i < Swarm.Sources.Count; i++)
                 {
-                    var j = Random.Next(Swarm.Sources.Count);
-                    var k = Random.Next(Swarm.Sources.Count);
+                    var j = Random.Next(Func.Dimensions);
+                    var k = Random.Next(Func.Dimensions);
                     Swarm.TryUpdateSource(Func, Random, i, j, k);
                 }
 
@@ -51,8 +51,8 @@ namespace ABC
                 for (var i = 0; i < Swarm.Sources.Count; i++)
                     if (p <= probabilities[i])
                     {
-                        var j = Random.Next(Swarm.Sources.Count);
-                        var k = Random.Next(Swarm.Sources.Count);
+                        var j = Random.Next(Func.Dimensions);
+                        var k = Random.Next(Func.Dimensions);
                         Swarm.TryUpdateSource(Func, Random, i, j, k);
                         break;
                     }
