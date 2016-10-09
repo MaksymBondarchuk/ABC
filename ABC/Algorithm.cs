@@ -26,7 +26,7 @@ namespace ABC
                 Swarm.Sources.Add(Swarm.GenerateSource(Func, Random));
         }
 
-        public void Run(int swarmSize, Function func)
+        public double Run(int swarmSize, Function func)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
@@ -78,6 +78,7 @@ namespace ABC
 
             watch.Stop();
             Console.WriteLine($"\nLast mprovement was on iteration #{lastImprovementOn}. Time elapsed: {watch.Elapsed}");
+            return Swarm.BestSource.F;
         }
     }
 }
