@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Drawing;
+using System.Linq;
 
 namespace ABC
 {
@@ -18,6 +19,8 @@ namespace ABC
             //algorithm.Run(swarmSize: 50, func: sphere);
 
             var ps = new PointSet();
+            ps.Load("Files\\Rings_5.dat");
+            ps.Dump2File("Files\\Rings_5 (1).dat");
         }
     }
 }
