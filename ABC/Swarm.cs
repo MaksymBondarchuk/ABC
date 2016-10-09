@@ -38,19 +38,20 @@ namespace ABC
             return source;
         }
 
-        public void UpdateBest()
+        public bool UpdateBest()
         {
             var min = Sources.First();
             foreach (var source in Sources)
                 if (source.F < min.F)
                     min = source;
 
-            if (min.F < BestSource.F)
-            {
-                BestSource.X.Clear();
-                BestSource.X.AddRange(min.X);
-                BestSource.F = min.F;
-            }
+            if (!(min.F < BestSource.F))
+                return false;
+
+            BestSource.X.Clear();
+            BestSource.X.AddRange(min.X);
+            BestSource.F = min.F;
+            return true;
         }
     }
 }

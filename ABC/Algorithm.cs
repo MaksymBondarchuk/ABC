@@ -65,11 +65,12 @@ namespace ABC
                         break;
                     }
 
-                Swarm.UpdateBest();
+                if (Swarm.UpdateBest())
+                    lastImprovementOn = iter;
 
                 // Scout bee phase
                 for (var i = 0; i < Swarm.Sources.Count; i++)
-                    if (Swarm.Sources[i].Trials == 6)
+                    if (Swarm.Sources[i].Trials == 100)
                         Swarm.Sources[i] = Swarm.GenerateSource(Func, Random);
 
                 Console.WriteLine($"#{iter,-4} Best source = {Swarm.BestSource.F,-7:0.00000}");
