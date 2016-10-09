@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ABC
 {
@@ -10,6 +6,20 @@ namespace ABC
     {
         public List<double> X { get; set; } = new List<double>();
 
-        public double F { get; set; }
+        private double _f = double.MaxValue;
+
+        public double F
+        {
+            get { return _f; }
+            set
+            {
+                Fitness = value < 0 ? 1 - value : 1 / (1 + value);
+                _f = value;
+            }
+        }
+
+        public double Fitness { get; set; }
+
+        public int Trials { get; set; }
     }
 }

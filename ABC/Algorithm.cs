@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ABC
 {
@@ -14,7 +15,7 @@ namespace ABC
 
         private Random Random { get; } = new Random();
 
-        private Swarm Swarm { get; set; } = new Swarm();
+        private Swarm Swarm { get; } = new Swarm();
         #endregion
 
         private void Initialize(int swarmSize, Function func)
@@ -22,12 +23,7 @@ namespace ABC
             Func = func;
 
             for (var s = 0; s < swarmSize; s++)
-            {
-                var source = new Source();
-                for (var d = 0; d < Func.Dimensions; d++)
-                    source.X.Add(Func.BoundLower + Random.NextDouble() * (Func.BoundUpper - Func.BoundLower));
-                Swarm.Sources.Add(source);
-            }
+                Swarm.Sources.Add(Swarm.GenerateSource(Func, Random));
         }
 
         public void Run(int swarmSize, Function func)
@@ -39,7 +35,44 @@ namespace ABC
             var lastImprovementOn = 0;
             for (var iter = 0; iter < func.IterationsNumber; iter++)
             {
+                // Employed bees phase
+                for (var i = 0; i < Swarm.Sources.Count; i++)
+                {
+                    var j = Random.Next(Swarm.Sources.Count);
+                    var k = Random.Next(Swarm.Sources.Count);
 
+                    Swarm.TryUpdateSource(Func, Random, i, j, k);
+                }
+
+                // Onlooker bees phase
+                var probabilities = new List<double>();
+                var sum = .0;
+                foreach (var source in Swarm.Sources)
+                {
+                    sum += source.Fitness;
+                    probabilities.Add(sum);
+                }
+
+                var p = Random.NextDouble() * sum;
+                for (var i = 0; i < Swarm.Sources.Count; i++)
+                    if (p <= probabilities[i])
+                    {
+                        var j = Random.Next(Swarm.Sources.Count);
+                        var k = Random.Next(Swarm.Sources.Count);
+
+                        Swarm.TryUpdateSource(Func, Random, i, j, k);
+
+                        break;
+                    }
+
+                Swarm.UpdateBest();
+
+                // Scout bee phase
+                for (var i = 0; i < Swarm.Sources.Count; i++)
+                    if (Swarm.Sources[i].Trials == 6)
+                        Swarm.Sources[i] = Swarm.GenerateSource(Func, Random);
+
+                Console.WriteLine($"#{iter,-4} Best source = {Swarm.BestSource.F,-7:0.00000}");
             }
 
             watch.Stop();
