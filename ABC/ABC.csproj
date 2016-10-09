@@ -56,6 +56,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Files\Rings_5.dat" />
+    <None Include="Files\Separateclust_9.dat" />
+    <None Include="Files\Skewdistribution_3.dat" />
+    <None Include="Files\Stripes_3.dat" />
+    <None Include="Files\Threerings_3.dat" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
