@@ -5,12 +5,7 @@ namespace ABC
 {
     public class Algorithm
     {
-        #region Constants: private
-
-        #endregion
-
         #region Properties: private
-
         private Function Func { get; set; }
 
         private Random Random { get; } = new Random();
@@ -40,7 +35,6 @@ namespace ABC
                 {
                     var j = Random.Next(Swarm.Sources.Count);
                     var k = Random.Next(Swarm.Sources.Count);
-
                     Swarm.TryUpdateSource(Func, Random, i, j, k);
                 }
 
@@ -59,9 +53,7 @@ namespace ABC
                     {
                         var j = Random.Next(Swarm.Sources.Count);
                         var k = Random.Next(Swarm.Sources.Count);
-
                         Swarm.TryUpdateSource(Func, Random, i, j, k);
-
                         break;
                     }
 
