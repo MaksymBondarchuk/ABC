@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using Point = System.Windows.Point;
 
 namespace ABC
@@ -9,8 +11,9 @@ namespace ABC
     {
         public Point Point { get; set; }
 
-        public int IsCentroid { get; set; } //centroid mark
-        public Color Color { get; set; } //color scheme
+        public int IsCentroid { get; set; }
+
+        public Color Color { get; set; }
     };
 
 
@@ -18,17 +21,17 @@ namespace ABC
     {
         public List<FieldPoint> Points { get; } = new List<FieldPoint>();
 
-        private string GetFullFilePath(string fileName)
+        private static string GetFullFilePath(string fileName)
         {
             DirectoryInfo directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             return directoryInfo == null ? string.Empty : Path.Combine(directoryInfo.FullName, fileName);
         }
 
-        public void Load(string fileName)
+        public int Load(string fileName)
         {
             var filePath = GetFullFilePath(fileName);
 
-            if (!File.Exists(filePath)) return;
+            if (!File.Exists(filePath)) return -1;
             using (BinaryReader reader = new BinaryReader(File.Open(filePath, FileMode.Open)))
             {
                 var size = reader.ReadInt32();
@@ -52,6 +55,9 @@ namespace ABC
                     });
                 }
             }
+
+            var clustersNumberMatch = Regex.Match(fileName, @"_([\d]+)\.dat$");
+            return Convert.ToInt32(clustersNumberMatch.Groups[1].Value);
         }
 
         public void Dump2File(string fileName)
