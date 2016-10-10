@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm.cs" />
+    <Compile Include="FieldPoint.cs" />
     <Compile Include="Function.cs" />
     <Compile Include="PointSet.cs" />
     <Compile Include="Program.cs" />

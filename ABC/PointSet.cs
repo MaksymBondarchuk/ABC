@@ -7,16 +7,6 @@ using Point = System.Windows.Point;
 
 namespace ABC
 {
-    public class FieldPoint
-    {
-        public Point Point { get; set; }
-
-        public int IsCentroid { get; set; }
-
-        public Color Color { get; set; }
-    };
-
-
     public class PointSet
     {
         public List<FieldPoint> Points { get; } = new List<FieldPoint>();
