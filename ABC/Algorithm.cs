@@ -36,7 +36,7 @@ namespace ABC
                 for (var i = 0; i < Swarm.Sources.Count; i++)
                 {
                     var j = Random.Next(Swarm.ClustersNumber);
-                    var k = Random.Next(Func.Dimensions);
+                    var k = Random.Next(swarmSize);
                     Swarm.TryUpdateSource(Func, Random, i, j, k);
                 }
 
@@ -54,7 +54,7 @@ namespace ABC
                     if (p <= probabilities[i])
                     {
                         var j = Random.Next(Swarm.ClustersNumber);
-                        var k = Random.Next(Func.Dimensions);
+                        var k = Random.Next(swarmSize);
                         Swarm.TryUpdateSource(Func, Random, i, j, k);
                         break;
                     }

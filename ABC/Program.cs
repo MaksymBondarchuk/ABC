@@ -17,8 +17,7 @@ namespace ABC
                         (point.Point.Y - centroid.Y)*(point.Point.Y - centroid.Y)).Min());
                 },
                 BoundLower = new Point(0, 0),
-                BoundUpper = new Point(1100, 600),
-                Dimensions = 50
+                BoundUpper = new Point(1100, 600)
             };
 
             var algorithm = new Algorithm();
