@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace ABC
 {
@@ -8,17 +9,17 @@ namespace ABC
         /// <summary>
         /// Function
         /// </summary>
-        public Func<List<double>, double> F { get; set; }
+        public Func<List<Point>, List<FieldPoint>, double> F { get; set; }
 
         /// <summary>
         /// Lower boundary
         /// </summary>
-        public double BoundLower { get; set; }
+        public Point BoundLower { get; set; }
 
         /// <summary>
         /// Upper boundary
         /// </summary>
-        public double BoundUpper { get; set; }
+        public Point BoundUpper { get; set; }
 
         public int Dimensions { get; set; }
 

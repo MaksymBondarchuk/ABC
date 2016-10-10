@@ -17,6 +17,8 @@ namespace ABC
         {
             Func = func;
 
+            Swarm.ClustersNumber = Swarm.PointSet.Load("Files\\Threerings_3.dat");
+
             for (var s = 0; s < swarmSize; s++)
                 Swarm.Sources.Add(Swarm.GenerateSource(Func, Random));
         }
@@ -33,7 +35,7 @@ namespace ABC
                 // Employed bees phase
                 for (var i = 0; i < Swarm.Sources.Count; i++)
                 {
-                    var j = Random.Next(Func.Dimensions);
+                    var j = Random.Next(Swarm.ClustersNumber);
                     var k = Random.Next(Func.Dimensions);
                     Swarm.TryUpdateSource(Func, Random, i, j, k);
                 }
@@ -51,7 +53,7 @@ namespace ABC
                 for (var i = 0; i < Swarm.Sources.Count; i++)
                     if (p <= probabilities[i])
                     {
-                        var j = Random.Next(Func.Dimensions);
+                        var j = Random.Next(Swarm.ClustersNumber);
                         var k = Random.Next(Func.Dimensions);
                         Swarm.TryUpdateSource(Func, Random, i, j, k);
                         break;
@@ -69,7 +71,8 @@ namespace ABC
             }
 
             watch.Stop();
-            Console.WriteLine($"\nLast mprovement was on iteration #{lastImprovementOn}. Time elapsed: {watch.Elapsed}");
+            Console.WriteLine($"\nLast mprovement was on iteration #{lastImprovementOn}. " +
+                              $"Time elapsed: {watch.Elapsed}");
             return Swarm.BestSource.F;
         }
     }

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 
 namespace ABC
 {
     public class Source
     {
-        public List<double> X { get; set; } = new List<double>();
+        public List<Point> Centroids { get; } = new List<Point>();
 
         private double _f = double.MaxValue;
 

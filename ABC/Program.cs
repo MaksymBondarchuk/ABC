@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows;
 
 namespace ABC
 {
@@ -8,18 +9,24 @@ namespace ABC
         {
             var sphere = new Function
             {
-                F = x => { return x.Sum(t => t * t); },
-                BoundLower = -100,
-                BoundUpper = 100,
+                F = (centroids, points) =>
+                {
+                    return points.Sum(point => 
+                        centroids.Select(centroid => 
+                        (point.Point.X - centroid.X)*(point.Point.X - centroid.X) + 
+                        (point.Point.Y - centroid.Y)*(point.Point.Y - centroid.Y)).Min());
+                },
+                BoundLower = new Point(0, 0),
+                BoundUpper = new Point(1100, 600),
                 Dimensions = 50
             };
 
             var algorithm = new Algorithm();
-            //algorithm.Run(swarmSize: 50, func: sphere);
+            algorithm.Run(swarmSize: 50, func: sphere);
 
-            var ps = new PointSet();
-            ps.Load("Files\\Rings_5.dat");
-            ps.Dump2File("Files\\Rings_5 (1).dat");
+            //var ps = new PointSet();
+            //ps.Load("Files\\Rings_5.dat");
+            //ps.Dump2File("Files\\Rings_5 (1).dat");
         }
     }
 }
