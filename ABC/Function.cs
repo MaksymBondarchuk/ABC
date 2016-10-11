@@ -21,6 +21,6 @@ namespace ABC
         /// </summary>
         public Point BoundUpper { get; set; }
 
-        public int IterationsNumber { get; set; } = 10000;
+        public int IterationsNumber { get; set; } = 2500;
     }
 }

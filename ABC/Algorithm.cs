@@ -13,21 +13,21 @@ namespace ABC
         private Swarm Swarm { get; } = new Swarm();
         #endregion
 
-        private void Initialize(int swarmSize, Function func)
+        private void Initialize(int swarmSize, Function func, string fileName)
         {
             Func = func;
 
-            Swarm.ClustersNumber = Swarm.PointSet.Load("Files\\Threerings_3.dat");
+            Swarm.ClustersNumber = Swarm.PointSet.Load(fileName);
 
             for (var s = 0; s < swarmSize; s++)
                 Swarm.Sources.Add(Swarm.GenerateSource(Func, Random));
         }
 
-        public double Run(int swarmSize, Function func)
+        public double Run(int swarmSize, Function func, string fileName)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
 
-            Initialize(swarmSize, func);
+            Initialize(swarmSize, func, fileName);
 
             var lastImprovementOn = 0;
             for (var iter = 0; iter < func.IterationsNumber; iter++)
@@ -73,6 +73,11 @@ namespace ABC
             watch.Stop();
             Console.WriteLine($"\nLast mprovement was on iteration #{lastImprovementOn}. " +
                               $"Time elapsed: {watch.Elapsed}");
+
+            foreach (var centroid in Swarm.BestSource.Centroids)
+                Swarm.PointSet.Points.Add(new FieldPoint {IsCentroid = 1, Point = centroid});
+            Swarm.PointSet.Dump2File($"{fileName.Substring(0, fileName.Length - 4)} (1).dat" );
+
             return Swarm.BestSource.F;
         }
     }

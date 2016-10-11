@@ -21,7 +21,7 @@ namespace ABC
             };
 
             var algorithm = new Algorithm();
-            algorithm.Run(swarmSize: 50, func: sphere);
+            algorithm.Run(swarmSize: 50, func: sphere, fileName: "Files\\Separateclust_9.dat");
 
             //var ps = new PointSet();
             //ps.Load("Files\\Rings_5.dat");
