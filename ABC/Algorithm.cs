@@ -74,9 +74,14 @@ namespace ABC
             Console.WriteLine($"\nLast mprovement was on iteration #{lastImprovementOn}. " +
                               $"Time elapsed: {watch.Elapsed}");
 
+            Swarm.PointSet.UpdatePoints(Swarm.BestSource.Centroids);
             foreach (var centroid in Swarm.BestSource.Centroids)
                 Swarm.PointSet.Points.Add(new FieldPoint {IsCentroid = 1, Point = centroid});
-            Swarm.PointSet.Dump2File($"{fileName.Substring(0, fileName.Length - 4)} (1).dat" );
+
+            var newFileName = $"{fileName.Substring(0, fileName.Length - 4)} (1).dat";
+            Swarm.PointSet.Dump2File(newFileName);
+
+            Console.WriteLine($"Clustered data in \"{newFileName}\"");
 
             return Swarm.BestSource.F;
         }

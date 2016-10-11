@@ -34,7 +34,6 @@ namespace ABC
         public void TryUpdateSource(Function func, Random random, int i, int j, int k)
         {
             var phi = -1 + random.NextDouble() * 2;
-            // todo Can improve here
             var vX = Sources[i].Centroids[j].X + phi * (Sources[i].Centroids[j].X - Sources[k].Centroids[j].X);
             var vY = Sources[i].Centroids[j].Y + phi * (Sources[i].Centroids[j].Y - Sources[k].Centroids[j].Y);
 

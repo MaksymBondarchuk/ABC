@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Point = System.Windows.Point;
 
@@ -67,6 +68,33 @@ namespace ABC
                     writer.Write((int)point.Color.B);
                     writer.Write(point.IsCentroid);
                 }
+            }
+        }
+
+        public void UpdatePoints(List<Point> centroids)
+        {
+            var random = new Random();
+            var colors = centroids.Select(centroid => 
+                Color.FromArgb(255, random.Next(255), random.Next(255), random.Next(255))).ToList();
+
+            foreach (var point in Points)
+            {
+                var minSquareDistance = double.MaxValue;
+                var minSquareDistanceTo = 0;
+
+                for (var i = 0; i < centroids.Count; i++)
+                {
+                    var centroid = centroids[i];
+                    var squareDistance = (point.Point.X - centroid.X)*(point.Point.X - centroid.X) +
+                                         (point.Point.Y - centroid.Y)*(point.Point.Y - centroid.Y);
+                    if (squareDistance < minSquareDistance)
+                    {
+                        minSquareDistance = squareDistance;
+                        minSquareDistanceTo = i;
+                    }
+                }
+
+                point.Color = colors[minSquareDistanceTo];
             }
         }
     }
