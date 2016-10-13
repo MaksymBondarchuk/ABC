@@ -63,8 +63,21 @@ namespace ABC
                     }
                     return sm / points.Count;
                 },
+                XB = (centroids, points) =>
+                {
+                    var msdcc = (from centroid in centroids
+                                 from otherCentroid in centroids
+                                 where centroid != otherCentroid
+                                 select Math.Pow(centroid.X - otherCentroid.X, 2) +
+                                        Math.Pow(centroid.Y - otherCentroid.Y, 2))
+                                        .Min();
+                    var msdoc = points.Sum(point =>
+                        centroids.Select(centroid =>
+                        point.SquareDistanceTo(centroid)).Min());
+                    return msdoc / (points.Count * msdcc);
+                },
                 BoundLower = new Point(0, 0),
-                BoundUpper = new Point(1100, 600)
+                BoundUpper = new Point(1100, 600),
             };
 
             var algorithm = new Algorithm();
