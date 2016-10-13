@@ -9,7 +9,12 @@ namespace ABC
         /// <summary>
         /// Function
         /// </summary>
-        public Func<List<Point>, List<FieldPoint>, double> F { get; set; }
+        // ReSharper disable once InconsistentNaming
+        public Func<List<Point>, List<FieldPoint>, double> SSE { get; set; }
+
+        public Func<List<Point>, List<FieldPoint>, double> SM { get; set; }
+
+        public Func<List<Point>, List<FieldPoint>, double> XB { get; set; }
 
         /// <summary>
         /// Lower boundary

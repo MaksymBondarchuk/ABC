@@ -27,7 +27,7 @@ namespace ABC
                 };
                 source.Centroids.Add(centroid);
             }
-            source.F = func.F(source.Centroids, PointSet.Points);
+            source.F = func.SSE(source.Centroids, PointSet.Points);
             return source;
         }
 
@@ -40,7 +40,7 @@ namespace ABC
             var newSource = new Source();
             for (var x = 0; x < Sources[i].Centroids.Count; x++)
                 newSource.Centroids.Add(x == j ? new Point(vX, vY) : Sources[i].Centroids[x]);
-            newSource.F = func.F(newSource.Centroids, PointSet.Points);
+            newSource.F = func.SSE(newSource.Centroids, PointSet.Points);
 
             if (newSource.F < Sources[i].F)
             {

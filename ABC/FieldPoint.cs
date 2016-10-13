@@ -10,5 +10,12 @@ namespace ABC
         public int IsCentroid { get; set; }
 
         public Color Color { get; set; }
+
+        public double SquareDistanceTo(Point point)
+        {
+            var x = Point.X - point.X;
+            var y = Point.Y - point.Y;
+            return x * x + y * y;
+        }
     };
 }

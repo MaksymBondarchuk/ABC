@@ -67,12 +67,14 @@ namespace ABC
                     if (Swarm.Sources[i].Trials == 100)
                         Swarm.Sources[i] = Swarm.GenerateSource(Func, Random);
 
-                Console.WriteLine($"#{iter,-4} Best source = {Swarm.BestSource.F,-7:0.00000}");
+                Console.WriteLine($"#{iter,-4} Best source = {Swarm.BestSource.F,-7:0.00000}" +
+                                  $" Its SM = {Func.SM(Swarm.BestSource.Centroids, Swarm.PointSet.Points)}");
             }
 
             watch.Stop();
             Console.WriteLine($"\nLast mprovement was on iteration #{lastImprovementOn}. " +
-                              $"Time elapsed: {watch.Elapsed}");
+                              $"\nTime elapsed: {watch.Elapsed}" +
+                              $"\nSM: {Func.SM(Swarm.BestSource.Centroids, Swarm.PointSet.Points)}");
 
             Swarm.PointSet.UpdatePoints(Swarm.BestSource.Centroids);
             foreach (var centroid in Swarm.BestSource.Centroids)
